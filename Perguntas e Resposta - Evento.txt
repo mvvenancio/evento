@@ -1,0 +1,96 @@
+Qual é o comando SQL para atualizar o nome do participante com id_participante \= 2 para "Lucas" no Sistema de gerenciamento de eventos?
+
+UPDATE participantes SET nome_participante = 'Lucas' WHERE id_participante = 2;
+
+Qual é o comando SQL para selecionar o nome e email dos participantes que se inscreveram em eventos no local "Centro de Convenções" e que acontecerão em 2023 no Sistema de gerenciamento de eventos?
+
+SELECT p.nome_participante, p.email_participante
+FROM participantes p
+JOIN inscricoes i ON p.id_participante = i.id_participante
+JOIN eventos e ON i.id_evento = e.id_evento
+WHERE e.local_evento = 'Centro de Convenções' AND YEAR(e.data_evento) = 2023;
+
+Qual é o comando SQL para selecionar o nome e telefone dos participantes que se inscreveram em eventos que acontecerão no local "Centro de Convenções" no Sistema de gerenciamento de eventos?
+
+SELECT p.nome_participante, p.telefone_participante
+FROM participantes p
+JOIN inscricoes i ON p.id_participante = i.id_participante
+JOIN eventos e ON i.id_evento = e.id_evento
+WHERE e.local_evento = 'Centro de Convenções';
+
+Qual é o comando SQL para selecionar o nome e a descrição dos eventos que acontecerão em 2023 no Sistema de gerenciamento de eventos?
+
+SELECT nome_evento, descricao_evento
+FROM eventos
+WHERE YEAR(data_evento) = 2023;
+
+Qual é o comando SQL para selecionar o número total de inscrições por evento no Sistema de gerenciamento de eventos?
+
+SELECT e.nome_evento, COUNT(i.id_inscricao) AS total_inscricoes
+FROM eventos e
+LEFT JOIN inscricoes i ON e.id_evento = i.id_evento
+GROUP BY e.nome_evento;
+
+Qual é o comando SQL para selecionar o nome e email dos participantes que se inscreveram em eventos que acontecerão em julho de 2023 no Sistema de gerenciamento de eventos?
+
+SELECT p.nome_participante, p.email_participante
+FROM participantes p
+JOIN inscricoes i ON p.id_participante = i.id_participante
+JOIN eventos e ON i.id_evento = e.id_evento
+WHERE YEAR(e.data_evento) = 2023 AND MONTH(e.data_evento) = 7;
+
+Qual é o comando SQL para selecionar o nome e a descrição dos eventos que acontecerão em 2026 no Sistema de gerenciamento de eventos?
+
+SELECT nome_evento, descricao_evento
+FROM eventos
+WHERE YEAR(data_evento) = 2024;
+
+Qual é o comando SQL para atualizar a data do evento com id_evento \= 1 para '2024-07-15' no Sistema de gerenciamento de eventos?
+
+UPDATE eventos SET data_evento = '2024-07-15' WHERE id_evento = 1;
+
+Qual é o comando SQL para selecionar o nome e a quantidade de eventos em que cada participante se inscreveu no Sistema de gerenciamento de eventos?
+
+SELECT p.nome_participante, COUNT(i.id_evento) AS num_eventos
+FROM participantes p
+JOIN inscricoes i ON p.id_participante = i.id_participante
+GROUP BY p.nome_participante;
+
+Qual é o comando SQL para selecionar o nome e o email dos participantes que se inscreveram em eventos que acontecerão no local "Centro de Convenções" no Sistema de gerenciamento de eventos?
+
+SELECT p.nome_participante, p.email_participante
+FROM participantes p
+JOIN inscricoes i ON p.id_participante = i.id_participante
+JOIN eventos e ON i.id_evento = e.id_evento
+WHERE e.local_evento = 'Centro de Convenções';
+
+Qual é o comando SQL para selecionar o nome e data dos eventos que têm menos de 100 participantes no Sistema de gerenciamento de eventos?
+
+SELECT e.nome_evento, e.data_evento
+FROM eventos e
+JOIN inscricoes i ON e.id_evento = i.id_evento
+GROUP BY e.nome_evento, e.data_evento
+HAVING COUNT(i.id_participante) < 100;
+
+Qual é o comando SQL para selecionar o nome e telefone dos participantes que se inscreveram em eventos que custam menos de R$ 100 no Sistema de gerenciamento de eventos?
+
+SELECT p.nome_participante, p.telefone_participante
+FROM participantes p
+JOIN inscricoes i ON p.id_participante = i.id_participante
+JOIN eventos e ON i.id_evento = e.id_evento
+WHERE e.preco_evento < 100.00;
+
+Qual é o comando SQL para selecionar o nome e email dos participantes que se inscreveram no evento com id_evento \= 1 no Sistema de gerenciamento de eventos?
+
+SELECT p.nome_participante, p.email_participante
+FROM participantes p
+JOIN inscricoes i ON p.id_participante = i.id_participante
+WHERE i.id_evento = 1;
+
+Qual é o comando SQL para selecionar o nome e telefone de quem vai participar nos eventos em "Estádio de Futebol" no Sistema de gerenciamento de eventos?
+
+SELECT p.nome_participante, p.telefone_participante
+FROM participantes p
+JOIN inscricoes i ON p.id_participante = i.id_participante
+JOIN eventos e ON i.id_evento = e.id_evento
+WHERE e.local_evento = 'Estádio de Futebol';
